@@ -61,15 +61,7 @@
                                     </select>
                                 </div>
                             {% endif %}
-                                <div class="col-12">
-                                    <label for="id_size_{{ product.id }}"><strong>Size:</strong></label>
-                                    <select class="form-control mb-3" name="product_size" id="id_size_{{ product.id }}">
-                                        <option value="" selected disabled>Select Size</option>
-                                        {% for size in product.size_choices %}
-                                            <option value="{{ size.0 }}">{{ size.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                                
                             <div class="col-12">
                                 <p class="mt-3"><strong>Quantity:</strong></p>
                                 <div class="form-group w-50">
