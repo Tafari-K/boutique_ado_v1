@@ -124,9 +124,64 @@
         window.scrollTo(0,0)
     })
 </script>
-{% include 'products/includes/quantity_input_script.html' %}
 
 <script type="text/javascript">
+    // Disable +/- buttons outside 1-99 range
+    function handleEnableDisable(itemId, size) {
+        let currentValueSelector = size ? `.size_${itemId}_${size}` : `.id_qty_${itemId}`;
+        let currentValue = parseInt($(currentValueSelector).val());
+        
+        let minusButtonSelector = size ? `.decrement-size_${itemId}_${size}` : `.decrement-qty_${itemId}`;
+        let plusButtonSelector = size ? `.increment-size_${itemId}_${size}` : `.increment-qty_${itemId}`;
+        
+        let minusDisabled = currentValue < 2;
+        let plusDisabled = currentValue > 98;
+        
+        $(minusButtonSelector).prop('disabled', minusDisabled);
+        $(plusButtonSelector).prop('disabled', plusDisabled);
+    }
+
+    // Ensure proper enabling/disabling of all inputs on page load
+    var allQtyInputs = $('.qty_input');
+    for(var i = 0; i < allQtyInputs.length; i++){
+        var itemId = $(allQtyInputs[i]).data('item_id');
+        var size = $(allQtyInputs[i]).data('size');
+        handleEnableDisable(itemId, size);
+    }
+
+    // Check enable/disable every time the input is changed
+    $('.qty_input').change(function() {
+        var itemId = $(this).data('item_id');
+        var size = $(this).data('size');
+        handleEnableDisable(itemId, size);
+    });
+
+    // Increment quantity
+    $('.increment-qty').click(function(e) {
+        e.preventDefault();
+        var itemId = $(this).data('item_id');
+        var size = $(this).data('size');
+        
+        let inputSelector = size ? `.size_${itemId}_${size}` : `.id_qty_${itemId}`;
+        var closestInput = $(inputSelector);
+        var currentValue = parseInt(closestInput.val());
+        closestInput.val(currentValue + 1);
+        handleEnableDisable(itemId, size);
+    });
+
+    // Decrement quantity
+    $('.decrement-qty').click(function(e) {
+        e.preventDefault();
+        var itemId = $(this).data('item_id');
+        var size = $(this).data('size');
+        
+        let inputSelector = size ? `.size_${itemId}_${size}` : `.id_qty_${itemId}`;
+        var closestInput = $(inputSelector);
+        var currentValue = parseInt(closestInput.val());
+        closestInput.val(currentValue - 1);
+        handleEnableDisable(itemId, size);
+    });
+
     // Update quantity on click
     $('.update-link').click(function(e) {
         var form = $(this).prev('.update-form');
