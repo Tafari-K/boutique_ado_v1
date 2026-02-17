@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     #other apps
     'crispy_forms',
+    
 ]
 
 MIDDLEWARE = [
