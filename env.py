@@ -1,0 +1,4 @@
+import os
+
+os.environ.setdefault('STRIPE_PUBLIC_KEY', 'pk_test_51T1pRjHsPvh6i8suG68pRO4eefTuVMCEP2Nk7PW7HSY1J4YZtNKfIuoGSb6J4T3ItU99dHm9kxp5k4Rsi4SjF8co00SAnFr8So')
+os.environ.setdefault('STRIPE_SECRET_KEY', 'sk_test_51T1pRjHsPvh6i8suPxjBet5giDH3VWO6BrngenC4ltEYr7l5xDwUTUmBSExhJWsrgj2NopcLwCrvNGUqFh6e6rEB00R5ZOhUMp')
